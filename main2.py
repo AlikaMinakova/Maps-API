@@ -1,4 +1,4 @@
-def mach_coor(json_response):
+def mach_coor(json_response, zoom):
 
     toponym = json_response["response"]["GeoObjectCollection"][
         "featureMember"][0]["GeoObject"]
@@ -12,12 +12,10 @@ def mach_coor(json_response):
 
     spn1 = abs(float(toponym_lowerCorner1) - float(toponym_upperCorner1)) / 2.0
     spn2 = abs(float(toponym_lowerCorner2) - float(toponym_upperCorner2)) / 2.0
-
     map_params = {
         "ll": ",".join([toponym_longitude, toponym_lattitude]),
-        "spn": ",".join([str(spn1), str(spn2)]),
         "l": "map",
-        "pt": ",".join([toponym_longitude, toponym_lattitude, 'pm2rdm'])
+        "pt": ",".join([toponym_longitude, toponym_lattitude, 'pm2rdm']),
+        "z": str(zoom)
     }
-
     return map_params
